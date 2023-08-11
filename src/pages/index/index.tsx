@@ -1,10 +1,17 @@
-import { View, Text, CoverView, Icon } from "@tarojs/components";
+import { View, Text, CoverView, Icon, Button } from "@tarojs/components";
 import { useLoad, useReachBottom } from "@tarojs/taro";
+import { useSelector, useDispatch } from "react-redux";
+
 // import CustomTabBar from "src/components/custom-tab-bar/index";
 
 import "./index.scss";
+import { addList } from "src/redux/todoList";
 
 export default function Index() {
+  const dispatch = useDispatch();
+  const list = useSelector((state: any) => state.todos);
+  console.log(list, "todoList");
+
   useLoad(() => {
     console.log("Page loaded11.");
   });
@@ -18,6 +25,15 @@ export default function Index() {
     if (e) {
       console.log("dataset", e?.currentTarget.dataset);
     }
+  };
+
+  const handleAddList = () => {
+    dispatch(
+      addList({
+        id: Date.now(),
+        text: `新的 ${Date.now()}`,
+      })
+    );
   };
 
   return (
@@ -46,9 +62,8 @@ export default function Index() {
         <Icon size="20" type="info_circle" />
         <Icon size="20" type="circle" />
       </View>
-      <Text selectable={true} userSelect={true}>
-        文本组件
-      </Text>
+      <Text userSelect={true}>文本组件</Text>
+      <Button onClick={handleAddList}>增加todoList</Button>
       {/* <CustomTabBar /> */}
     </CoverView>
   );

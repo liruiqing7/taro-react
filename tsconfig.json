@@ -21,7 +21,9 @@
     "typeRoots": ["node_modules/@types"],
     "paths": {
       "src/*": ["./src/*"]
-    }
+    },
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true
   },
   "include": ["./src", "./types"],
   "compileOnSave": false
